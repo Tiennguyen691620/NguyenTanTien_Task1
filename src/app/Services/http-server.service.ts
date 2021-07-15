@@ -49,13 +49,6 @@ export class HttpServerService {
       .pipe(catchError(this.handleError));
   }
   // tslint:disable-next-line:typedef
-  // public getPost() {
-  //   const url = `${this.REST_API_SERVER}/students`;
-  //   return this.httpClient
-  //     .post<any>(url, this.httpOptions)
-  //     .pipe(catchError(this.handleError));
-  // }
-  // tslint:disable-next-line:typedef
   addStudent(data: Student) {
     const url = `${this.REST_API_SERVER}/students`;
     return this.httpClient

@@ -1,4 +1,4 @@
-     // tslint:disable-next-line:no-trailing-whitespace
+// tslint:disable-next-line:no-trailing-whitespace
 
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CommonService} from '../Services/common.service';
@@ -20,16 +20,6 @@ export class AddStudentComponent implements OnInit {
   errors = errorMessages;
   studentForm!: FormGroup;
   confirmValidParentMatcher = new ConfirmValidParentMatcher();
-  // public studentForm = new FormGroup({
-  //   name: new FormControl(''),
-  //   address: new FormControl(''),
-  //   phone: new FormControl(''),
-  //   email: new FormControl(''),
-  //   passwordGroup: new FormGroup({
-  //     password: new FormControl(''),
-  //     confirmPassword: new FormControl(''),
-  //   })
-  // });
 
   constructor(
     private common: CommonService,
@@ -45,7 +35,7 @@ export class AddStudentComponent implements OnInit {
     if (this.id > 0) {
       this.serverHttp
         .modifyStudent(this.id, this.createNewData())
-        .subscribe((data) => {
+        .subscribe(() => {
           this.router.navigate(['student']);
         });
     } else {

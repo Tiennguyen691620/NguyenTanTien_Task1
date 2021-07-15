@@ -61,11 +61,11 @@ export class StudentComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  addStudent() {
+  public addStudent() {
     this.router.navigate(['add-student', 0]);
   }
   // tslint:disable-next-line:typedef
-  editStudent(studentId: any) {
+  public editStudent(studentId: any) {
     this.router.navigate(['add-student', studentId]);
   }
   // tslint:disable-next-line:typedef

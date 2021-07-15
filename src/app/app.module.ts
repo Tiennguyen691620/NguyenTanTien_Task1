@@ -16,6 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginComponent } from './login/login.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { LoginComponent } from './login/login.component';
     AddStudentComponent,
     EditStudentComponent,
     LoginComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

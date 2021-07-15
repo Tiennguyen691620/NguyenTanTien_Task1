@@ -1,15 +1,15 @@
-import {NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
 import {StudentComponent} from './student/student.component';
 import {NotFoundComponent} from './not-found/not-found.component';
 import {AddStudentComponent} from './add-student/add-student.component';
-import {EditStudentComponent} from './edit-student/edit-student.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/student',
     pathMatch: 'full'
   },
   {
@@ -21,12 +21,12 @@ const routes: Routes = [
     component: StudentComponent,
   },
   {
-    path: 'add-student',
+    path: 'add-student/:id',
     component: AddStudentComponent,
   },
   {
-    path: 'add-student/:id',
-    component: AddStudentComponent,
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: '**',
