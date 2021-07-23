@@ -1,102 +1,90 @@
 <app-header></app-header>
 
-<div class="container">
+<body>
+  <div class="container">
     <div class="p-3 mb-2 .bg-secondary.bg-gradient text-dark">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        Quan Ly Sinh vien
-                    </div>
-                    <div class="card-body">
-                        <button type="button" class="btn btn-primary" style="margin-left: 64rem; border-radius: 10px;" (click)="addStudent()">Add Student</button>
-                        <table class="table table-striped table-hover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th scope="col">STT</th>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Phone number</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">PassWord</th>
-                                    <th scope="col">Is Edit</th>
-                                    <th scope="col">Active</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!--    <ng-container *ngIf="student$ | async as students else loadingTmpl">-->
-                                <tr *ngFor="let student of studentShow, let i = index">
-                                    <th scope="row">{{(pageIndex - 1) * pageSize + i + 1 }}</th>
-                                    <td>{{student.id}}</td>
-                                    <td>{{student.name}}</td>
-                                    <td>{{student.address}}</td>
-                                    <td>{{student.phone}}</td>
-                                    <td>{{student.email}}</td>
-                                    <td>{{student.passwordGroup.password}}</td>
-                                    <td>{{student.isEdit}}</td>
-                                    <td>
-                                        <button type="button" class="btn btn-success" style="margin-right: 10px" (click)="editStudent(student.id)">Edit
-          </button>
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" title="nhan de xoa" data-bs-target="#exampleModal">
-            Delete
-          </button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Nofitication</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        Are you delete student?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary" (click)="deleteStudent(student.id)">Delete</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- <button type="button" class="btn btn-danger" (click)="deleteStudent(student.id)">Delete
-          </button> -->
-                                    </td>
-                                </tr>
-                                <!--    </ng-container>-->
-                            </tbody>
-                        </table>
-                        <!--  <ng-template #loadingTmpl>-->
-                        <!--    loading...-->
-                        <!--  </ng-template>-->
-                    </div>
-                </div>
-                <div class="container border-primary panigation" style="margin-left: 58rem;">
-                    <select class=" mr-4 p-1 border-primary rounded" style="border-radius: 20px; padding: 7px;" [(ngModel)]="pageSize" (ngModelChange)="changePageSize(pageSize)">
-                    <!-- (ngModelChanged)="changePageSize($event)" -->
-                    <option value="10">10 pages</option>
-                    <option value="20">20 pages</option>
-                    <option value="30">30 pages</option>
-                    <option value="40">40 pages</option>
-                  </select>
-                    <button type="button" class="btn border-primary" (click)="increaseOrDecreasePage(pageIndex - 1)" [class.border-dark]="pageIndex <= 1" [disabled]="pageIndex <= 1">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                    <ng-container *ngFor="let item of pageNumbers; let i = index">
-                        <button class="btn border-primary mx-1" [class.btn-primary]="pageIndex === (i + 1)" (click)="getData(item)">
-                      <!-- [ngClass]="{'btn-danger': +pageIndex === (i + 1)}" -->
-                      <span>{{item}}</span>
-                    </button>
-                    </ng-container>
-
-                    <button class="btn border-primary" (click)="increaseOrDecreasePage(pageIndex + 1)" [class.border-dark]="pageIndex >= pageNumbers.length" [disabled]="pageIndex >= pageNumbers.length">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header fa-user-circle mr-2">Quan Ly Sinh vien</div>
+            <div class="card-body">
+              <button
+                nz-button
+                class="bt_add btn btn-primary mb-2 pb-2"
+                (click)="addStudent()"
+              >
+                Add Student
+              </button>
+              <nz-table
+                #editRowTable
+                nzBordered
+                [nzData]="listOfData"
+                nzTableLayout="fixed"
+                (nzPageIndexChange)="getPageIndex($event)"
+                (nzPageSizeChange)="getPageSizeChange($event)"
+                [nzPaginationPosition]="'bottom'"
+                [nzPageSizeOptions]="[10, 20, 30, 40]"
+                [nzShowSizeChanger]="true"
+              >
+                <thead>
+                  <tr>
+                    <th nzWidth="10%" style="text-align: center">STT</th>
+                    <th nzWidth="15%">Name</th>
+                    <th nzWidth="20%">Address</th>
+                    <th nzWidth="20%">Phone number</th>
+                    <th nzWidth="20%">Email</th>
+                    <th style="text-align: center">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let student of listOfData; let i = index">
+                    <th style="text-align: center">
+                      {{ (pageIndex - 1) * pageSize + i + 1 }}
+                    </th>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.address }}</td>
+                    <td>{{ student.phone }}</td>
+                    <td>{{ student.email }}</td>
+                    <td>
+                      <button
+                        nz-button
+                        (click)="editStudent(student.id)"
+                        nzType="primary"
+                        style="margin-right: 10px"
+                      >
+                        Edit
+                      </button>
+                      <button
+                        nz-button
+                        nzType="primary"
+                        nzDanger
+                        nz-popconfirm
+                        nzPopconfirmTitle="Are you want delete student ?"
+                        nzOkText="Delete"
+                        nzCancelText="Cancel"
+                        (nzOnConfirm)="deleteStudent(student.id)"
+                      >
+                        Delete
+                      </button>
+                      <!-- <button nz-button (click)="deleteStudent(student.id)">
+                        Delete
+                      </button> -->
+                      <!-- <button
+                      nz-button
+                      nzType="primary"
+                      (click)="createComponentModal()"
+                    >
+                      <span>Delete</span>
+                    </button> -->
+                    </td>
+                  </tr>
+                </tbody>
+              </nz-table>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-
+  </div>
+</body>
 <app-footer></app-footer>

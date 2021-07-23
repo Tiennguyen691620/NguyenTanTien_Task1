@@ -1,7 +1,7 @@
 import { any } from 'codelyzer/util/function';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Student} from '../model/Student';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn} from '@angular/forms';
@@ -11,17 +11,12 @@ import {ErrorStateMatcher} from '@angular/material/core';
   providedIn: 'root'
 })
 export class HttpServerService {
-  // getpost() {
-  //   throw new Error('Method not implemented.');
-  // }
   constructor(
     private httpClient: HttpClient
   ) { }
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      // Authorization: 'my-auth-token',
-      // Authorization: 'Basic ' + btoa('username:password'),
     }),
   };
   private REST_API_SERVER = 'http://localhost:5000';
@@ -34,7 +29,7 @@ export class HttpServerService {
   }
 
   // tslint:disable-next-line:typedef
-  public getStudents() {
+  public getStudents(): Observable<any> {
     const url = `${this.REST_API_SERVER}/students`;
     return this.httpClient
       .get<any>(url, this.httpOptions)
@@ -48,25 +43,43 @@ export class HttpServerService {
       .get<any>(url, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+  public getManager(username: string): Observable<any> {
+    const url = `${this.REST_API_SERVER}/manager/?username=${username}`;
+    return this.httpClient
+      .get<any>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+
+
   // tslint:disable-next-line:typedef
-  addStudent(data: Student) {
+  public addStudent(data: Student) {
     const url = `${this.REST_API_SERVER}/students`;
     return this.httpClient
       .post<any>(url, data, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+
+
   // tslint:disable-next-line:typedef
   public deleteStudent(studentId: number) {
     const url = `${this.REST_API_SERVER}/students/` + studentId;
     return this.httpClient.delete<any>(url).pipe(catchError(this.handleError));
   }
+
+
+
   // tslint:disable-next-line:typedef
   modifyStudent(studentId: number, data: Student) {
-    const url = `${this.REST_API_SERVER}/student/` + studentId;
+    const url = `${this.REST_API_SERVER}/students/` + studentId;
     return this.httpClient
       .put<any>(url, data, this.httpOptions)
       .pipe(catchError(this.handleError));
   }
+
+
 
   // tslint:disable-next-line:typedef
   private handleError(error: HttpErrorResponse) {
@@ -92,7 +105,7 @@ export class ConfirmValidParentMatcher implements ErrorStateMatcher {
   }
 }
 export const errorMessages: { [key: string]: string } = {
-  name: 'Full name must be between 1 and 128 characters',
+  name: 'Full name must be abc...',
   address: 'address',
   phone: 'Phone number must be 10 number',
   email: 'Email must be a valid email address (username@domain)',

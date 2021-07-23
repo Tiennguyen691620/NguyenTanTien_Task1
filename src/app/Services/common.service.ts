@@ -10,7 +10,7 @@ export class CommonService {
   constructor() { }
 
   // tslint:disable-next-line:typedef
-  increamentStudent() {
+  incrementStudent() {
     this.totalStudents++;
     this.totalStudents$.next(this.totalStudents);
   }

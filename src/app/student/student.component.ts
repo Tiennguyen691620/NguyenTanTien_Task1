@@ -1,63 +1,42 @@
-import { any } from 'codelyzer/util/function';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Student } from '../model/Student';
 import { HttpServerService } from '../Services/http-server.service';
 import { Router } from '@angular/router';
 import { CommonService } from '../Services/common.service';
-import { Observable, Subscriber } from 'rxjs';
-
-
-
+import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
+import { ViewContainerRef } from '@angular/core';
+import { NzModalCustomComponent } from '../nz-modal-custom/nz-modal-custom.component';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
-  styleUrls: ['./student.component.scss']
+  styleUrls: ['./student.component.scss'],
 })
 export class StudentComponent implements OnInit {
-  pageNumbers: number[] = [];
+  // pageNumbers: number[] = [];
+    // studentShow!: Student[];
   pageIndex = 1;
   pageSize = 10;
-  public students: Student[] = [];
-  studentShow!: Student[];
+  listOfData: Student[] = [];
+  // editCache: { [key: string]: { edit: boolean; data: Student } } = {};
+
   constructor(
     private common: CommonService,
     private serverHttp: HttpServerService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private viewContainerRef: ViewContainerRef,
+    private modal: NzModalService,
+  ) {}
 
   ngOnInit(): void {
-    //   this.serverHttp.getPost().subscribe((result: any) => {
-    //   this.showpost = result;
-    //   this.totallength = result.length;
-    //   console.log(this.showpost);
-    // }),
-
-    this.loadData(this.pageIndex);
+    this.loadData();
   }
   // tslint:disable-next-line:typedef
-  public loadData(pageIndex: number) {
+  public loadData() {
     this.serverHttp.getStudents().subscribe((data) => {
-      this.students = data;
-      this.studentShow = this.students.slice(0, this.pageSize);
+      console.log('getStudents', data);
+      this.listOfData = data;
       this.common.setTotalStudents(data.length);
-      this.pageNumbers = [];
-      for (
-        let i = 1;
-        i <= Math.ceil(this.students.length / this.pageSize);
-        i++
-      ) {
-        this.pageNumbers?.push(i);
-      }
     });
-  }
-  // tslint:disable-next-line:typedef
-  handleDelete(id: number) {
-    // @ts-ignore
-    const index = this.students.findIndex(e => e.id === id);
-    if (index !== -1) {
-      this.students.splice(index, 1);
-    }
-    console.log(id);
   }
 
   // tslint:disable-next-line:typedef
@@ -69,44 +48,39 @@ export class StudentComponent implements OnInit {
     this.router.navigate(['add-student', studentId]);
   }
   // tslint:disable-next-line:typedef
-  public deleteStudent(studentId: any) {
+  public deleteStudent(studentId: any): void {
     this.serverHttp.deleteStudent(studentId).subscribe((data) => {
       console.log('delete', data);
-      this.loadData(this.pageIndex);
+      this.loadData();
     });
   }
-  increaseOrDecreasePage(pageIndex: number): void {
+  // tslint:disable-next-line:typedef
+  getPageIndex(pageIndex: number) {
     this.pageIndex = pageIndex;
-    this.studentShow = this.students.slice(
-      (this.pageIndex - 1) * this.pageSize,
-      this.pageIndex * this.pageSize
-    );
   }
-  getData(pageIndex: number): void {
-    this.pageIndex = pageIndex;
-    console.log(this.pageIndex);
-    this.studentShow = this.students.slice(
-      (pageIndex - 1) * this.pageSize,
-      pageIndex * this.pageSize
-    );
-  }
-  changePageSize(pageSize: number): void {
-    this.pageNumbers = [];
-    console.log(this.students);
-    for (
-      let i = 1;
-      i <= Math.ceil(this.students.length / this.pageSize);
-      i++
-    ) {
-      this.pageNumbers?.push(i);
-    }
-    const totalPages = this.pageNumbers.length;
-    if (this.pageIndex > totalPages) {
-      this.pageIndex = totalPages;
-    }
-    this.pageSize = pageSize;
-    this.studentShow = this.students.slice(0, this.pageSize);
 
-    // this.getData(this.pageIndex);
+  // tslint:disable-next-line:typedef
+  getPageSizeChange(PageSizeChange: number) {
+    this.pageSize = PageSizeChange;
+  }
+
+  createCustomButtonModal(): void {
+    const modal: NzModalRef = this.modal.create({
+      nzTitle: 'custom button demo',
+      nzContent: 'pass array of button config to nzFooter to create multiple buttons',
+      nzFooter: [
+        {
+          label: 'Close',
+          shape: 'round',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Delete',
+          type: 'primary',
+          shape: 'round',
+          onClick: () => this.deleteStudent({}),
+        },
+      ]
+    });
   }
 }

@@ -1,135 +1,15 @@
 {
   "students": [
     {
-      "name": "minh",
-      "address": "daklak",
+      "name": "Dung",
+      "address": "DaNang",
       "phone": "0889161328",
-      "email": "minh@gmail.com",
-      "passwordGroup": {
-        "password": "1111111111!@#",
-        "confirmPassword": "1111111111!@#"
-      },
-      "isEdit": "true",
-      "id": 10
-    },
-    {
-      "name": "hanh",
-      "address": "123",
-      "phone": "1234567890",
-      "email": "hanh@gmail.com",
-      "passwordGroup": {
-        "password": "123456789!@#",
-        "confirmPassword": "123456789!@#"
-      },
-      "isEdit": "fasle",
-      "id": 11
-    },
-    {
-      "name": "tien",
-      "address": "123456",
-      "phone": "2132132132",
       "email": "tiennguyen@gmail.com",
       "passwordGroup": {
-        "password": "789456123!@#",
-        "confirmPassword": "789456123!@#"
-      },
-      "isEdit": "fasle",
-      "id": 12
-    },
-    {
-      "name": "Hai",
-      "address": "QuangBinh",
-      "phone": "0889161328",
-      "email": "Hai@gmail.com",
-      "passwordGroup": {
-        "password": "123456789123!@#",
-        "confirmPassword": "123456789123!@#"
+        "password": "asdfasdf123!@#",
+        "confirmPassword": "asdfasdf123!@#"
       },
       "isEdit": "false",
-      "id": 14
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
-      "id": 30
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
-      "id": 16
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
-      "id": 17
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
-      "id": 18
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
-      "id": 19
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
-      "id": 20
-    },
-    {
-      "name": "Nam",
-      "address": "DaNang",
-      "phone": "1234567899",
-      "email": "tiennguyen@gmail.com",
-      "passwordGroup": {
-        "password": "asdfasdf123!@#",
-        "confirmPassword": "asdfasdf123!@#"
-      },
-      "isEdit": "true",
       "id": 21
     },
     {
@@ -181,7 +61,7 @@
       "id": 25
     },
     {
-      "name": "Nam",
+      "name": "DungAnCut",
       "address": "DaNang",
       "phone": "1234567899",
       "email": "tiennguyen@gmail.com",
@@ -323,6 +203,50 @@
       },
       "isEdit": "true",
       "id": 37
+    },
+    {
+      "name": "Dung",
+      "address": "DaNang",
+      "phone": "0889161328",
+      "email": "tiennguyen@gmail.com",
+      "passwordGroup": {
+        "password": "asdfasdf123!@#",
+        "confirmPassword": "asdfasdf123!@#"
+      },
+      "isEdit": "false",
+      "id": 38
+    },
+    {
+      "name": "Dung",
+      "address": "DaNang",
+      "phone": "0889161328",
+      "email": "tiennguyen@gmail.com",
+      "passwordGroup": {
+        "password": "asdfasdf123!@#",
+        "confirmPassword": "asdfasdf123!@#"
+      },
+      "isEdit": "false",
+      "id": 39
+    },
+    {
+      "name": "Tien",
+      "address": "DL",
+      "phone": "1234567891",
+      "email": "tiennguyen@gmail.com",
+      "passwordGroup": {
+        "password": "0889161328!@#",
+        "confirmPassword": "0889161328!@#"
+      },
+      "isEdit": "false",
+      "id": 40
+    }
+  ],
+  "manager": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "name": "Admin"
     }
   ],
   "posts": [

@@ -1,3 +1,6 @@
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+@import '~bootstrap/scss/bootstrap';
+
 /* You can add global styles to this file, and also import other style files */
 
 html,
@@ -8,8 +11,22 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
-    background-color: #6f42c1;
+    // background-color: #6f42c1;
 }
 
 // @import "~bootstrap/dist/css/bootstrap.css";
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+    width: auto;
+    padding-right: var(--bs-gutter-x, .75rem);
+    padding-left: var(--bs-gutter-x, .75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+/* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
