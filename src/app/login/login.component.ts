@@ -1,7 +1,7 @@
-import { Manager } from './../model/manager';
+import { Manager } from '../share/model/manager';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { HttpServerService } from '../Services/http-server.service';
+import { HttpServerService } from '../share/Services/http-server.service';
 import { Router } from '@angular/router';
 import { NzNotificationPlacement, NzNotificationService } from 'ng-zorro-antd/notification';
 
@@ -23,7 +23,15 @@ export class LoginComponent implements OnInit {
     private notification: NzNotificationService
   ) {}
 
-  submitForm(): void {
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      userName: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      remember: [true]
+    });
+  }
+
+  submitForm(value: Manager): void {
     // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
       if (this.validateForm.controls.hasOwnProperty(i)){
@@ -61,6 +69,7 @@ export class LoginComponent implements OnInit {
           }
         });
     }
+    console.log(value);
   }
 
   // tslint:disable-next-line:typedef
@@ -96,13 +105,7 @@ export class LoginComponent implements OnInit {
       ));
     }
 
-    ngOnInit(): void {
-      this.validateForm = this.fb.group({
-        userName: [null, [Validators.required]],
-        password: [null, [Validators.required]],
-        remember: [true]
-      });
-    }
+
 
 
 }

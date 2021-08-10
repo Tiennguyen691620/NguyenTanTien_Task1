@@ -6,10 +6,12 @@ import {catchError} from 'rxjs/operators';
 import {Student} from '../model/Student';
 import {FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { Manager } from '../model/manager';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttpServerService {
   constructor(
     private httpClient: HttpClient
@@ -26,6 +28,14 @@ export class HttpServerService {
     // @ts-ignore
     const isValid = otherControlNames.every(controlName => formGroup.get(controlName).value === formGroup.get(firstControlName).value);
     return isValid ? null : {childrenNotEqual: true};
+  }
+
+  // tslint:disable-next-line:typedef
+  public searchStudent(textSearch: any): Observable<any> {
+    const url = `${this.REST_API_SERVER}/students?q=${textSearch}`;
+    return this.httpClient
+    .get<Student>(url, this.httpOptions)
+    .pipe(catchError(this.handleError));
   }
 
   // tslint:disable-next-line:typedef
@@ -61,6 +71,14 @@ export class HttpServerService {
       .pipe(catchError(this.handleError));
   }
 
+  // tslint:disable-next-line:typedef
+  public addManager(data: Manager) {
+    const url = `${this.REST_API_SERVER}/manager`;
+    return this.httpClient
+      .post<any>(url, data, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
 
 
   // tslint:disable-next-line:typedef
@@ -74,6 +92,14 @@ export class HttpServerService {
   // tslint:disable-next-line:typedef
   modifyStudent(studentId: number, data: Student) {
     const url = `${this.REST_API_SERVER}/students/` + studentId;
+    return this.httpClient
+      .put<any>(url, data, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  // tslint:disable-next-line:typedef
+  modifyManager(managerId: number, data: Manager) {
+    const url = `${this.REST_API_SERVER}/manager/` + managerId;
     return this.httpClient
       .put<any>(url, data, this.httpOptions)
       .pipe(catchError(this.handleError));

@@ -25,9 +25,6 @@
             role="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
-            [routerLink]="['/dropdown']"
-            routerLinkActive="drop down"
-            [routerLinkActiveOptions]="{ exact: true }"
           >
             Dropdown
           </a>
@@ -65,14 +62,24 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            Xin Chào
+            Hello Tien
           </button>
-          <ul class="dropdown-menu">
-            <li>
-              <a class="dropdown-item1" (click)="showConfirm()">Logout</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li
+              [routerLink]="['/change-password']"
+              routerLinkActive="selected"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <button class="dropdown-item" type="button">Profile</button>
             </li>
-            <li><a class="dropdown-item2" href="#">Setting</a></li>
-            <li><a class="dropdown-item3" href="#">details profile</a></li>
+            <li>
+              <button class="dropdown-item" type="button">Setting</button>
+            </li>
+            <li>
+              <button class="dropdown-item" type="button" (click)="logout()">
+                Logout
+              </button>
+            </li>
           </ul>
         </div>
       </form>

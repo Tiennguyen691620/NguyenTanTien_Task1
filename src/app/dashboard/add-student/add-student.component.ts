@@ -1,14 +1,12 @@
-// tslint:disable-next-line:no-trailing-whitespace
-
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CommonService } from '../Services/common.service';
+import { CommonService } from '../../share/Services/common.service';
 import {
   ConfirmValidParentMatcher,
   errorMessages,
   HttpServerService,
-} from '../Services/http-server.service';
+} from '../../share/Services/http-server.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Student } from '../model/Student';
+import { Student } from '../../share/model/Student';
 import { Component } from '@angular/core';
 import { OnInit } from '@angular/core';
 

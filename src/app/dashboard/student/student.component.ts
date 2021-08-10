@@ -1,24 +1,27 @@
+import { any } from 'codelyzer/util/function';
+
 import { Component, Input, OnInit } from '@angular/core';
-import { Student } from '../model/Student';
-import { HttpServerService } from '../Services/http-server.service';
+import { Student } from '../../share/model/Student';
+import { HttpServerService } from '../../share/Services/http-server.service';
 import { Router } from '@angular/router';
-import { CommonService } from '../Services/common.service';
+import { CommonService } from '../../share/Services/common.service';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { ViewContainerRef } from '@angular/core';
-import { NzModalCustomComponent } from '../nz-modal-custom/nz-modal-custom.component';
+import { debounceTime } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',
   styleUrls: ['./student.component.scss'],
 })
 export class StudentComponent implements OnInit {
-  // pageNumbers: number[] = [];
-    // studentShow!: Student[];
   pageIndex = 1;
   pageSize = 10;
   listOfData: Student[] = [];
-  // editCache: { [key: string]: { edit: boolean; data: Student } } = {};
+  firstName: any;
+  textSearch?: string;
 
+  searchTerm$ = new BehaviorSubject<string>('');
   constructor(
     private common: CommonService,
     private serverHttp: HttpServerService,
@@ -29,9 +32,16 @@ export class StudentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData();
+    this.searchTerm$.pipe(debounceTime(1000)).subscribe((_) => {
+      this.serverHttp.searchStudent(this.textSearch).subscribe((students: any) => {
+        this.listOfData = students;
+      });
+      console.log(this.searchTerm$);
+    });
   }
   // tslint:disable-next-line:typedef
   public loadData() {
+    this.textSearch = '';
     this.serverHttp.getStudents().subscribe((data) => {
       console.log('getStudents', data);
       this.listOfData = data;
@@ -63,6 +73,22 @@ export class StudentComponent implements OnInit {
   getPageSizeChange(PageSizeChange: number) {
     this.pageSize = PageSizeChange;
   }
+
+  // search(search: any): void {
+  //   const targetValue: any[] = [];
+  //   this.listOfData.forEach((value: any) => {
+  //     const keys = Object.keys(value);
+  //     // tslint:disable-next-line: prefer-for-of
+  //     for (let i = 0; i < keys.length; i ++) {
+  //       if (value[keys[i]] && value[keys[i]].toString().toLocaleLowerCase().valueOf().includes(search)){
+  //         targetValue.push(value);
+  //         break;
+  //       }
+  //     }
+  //   });
+  //   this.listOfData  = targetValue;
+  // }
+
 
   createCustomButtonModal(): void {
     const modal: NzModalRef = this.modal.create({

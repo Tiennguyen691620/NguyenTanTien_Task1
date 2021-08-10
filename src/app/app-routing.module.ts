@@ -1,11 +1,14 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddStudentComponent } from './add-student/add-student.component';
-import { AuthGuard } from './auth/auth.guard';
-import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { StudentComponent } from './student/student.component';
+import { AddStudentComponent } from './dashboard/add-student/add-student.component';
+import { AuthGuard } from './share/auth/auth.guard';
+import { HomeComponent } from './dashboard/home/home.component';
+
+import { NotFoundComponent } from './dashboard/not-found/not-found.component';
+import { StudentComponent } from './dashboard/student/student.component';
+import { RegisterComponent } from './register/register.component';
+import { ChangePasswordComponent } from './dashboard/change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -30,7 +33,16 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    loadChildren: () =>
+      import('./login/login/login.module').then(x => x.LoginModule)
+  },
+  {
+    path: 'change-password',
+    component: ChangePasswordComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: '**',

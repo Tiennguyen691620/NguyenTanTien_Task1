@@ -13,7 +13,7 @@
       "id": 21
     },
     {
-      "name": "Nam",
+      "name": "LY",
       "address": "DaNang",
       "phone": "1234567899",
       "email": "tiennguyen@gmail.com",
@@ -37,7 +37,7 @@
       "id": 23
     },
     {
-      "name": "Nam",
+      "name": "HanhLe",
       "address": "DaNang",
       "phone": "1234567899",
       "email": "tiennguyen@gmail.com",
@@ -97,7 +97,7 @@
       "id": 28
     },
     {
-      "name": "Nam",
+      "name": "Hanh",
       "address": "DaNang",
       "phone": "1234567899",
       "email": "tiennguyen@gmail.com",
@@ -109,7 +109,7 @@
       "id": 29
     },
     {
-      "name": "Nam",
+      "name": "Huong",
       "address": "DaNang",
       "phone": "1234567899",
       "email": "tiennguyen@gmail.com",
@@ -239,6 +239,18 @@
       },
       "isEdit": "false",
       "id": 40
+    },
+    {
+      "name": "TienNguyen",
+      "address": "DakLak",
+      "phone": "0984503129",
+      "email": "tiennguyen3129@gmail.com",
+      "passwordGroup": {
+        "password": "!@#123456789",
+        "confirmPassword": "!@#123456789"
+      },
+      "isEdit": "true",
+      "id": 41
     }
   ],
   "manager": [
@@ -247,6 +259,42 @@
       "username": "admin",
       "password": "admin",
       "name": "Admin"
+    },
+    {
+      "fullname": "Nguyễn Tân Tiến",
+      "username": "tiennguyen",
+      "email": "tiennguyen@gmail.com",
+      "phoneNumber": "0889161327",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 2
+    },
+    {
+      "fullname": "Lê Thị Hạnh",
+      "username": "hanhle",
+      "email": "hanhle@gmail.com",
+      "phoneNumber": "0384416216",
+      "password": "hanhle",
+      "confirm": "hanhle",
+      "id": 3
+    },
+    {
+      "fullname": "hương",
+      "username": "huongthuy",
+      "email": "thuyhuong@gmail.com",
+      "phoneNumber": "0889161329",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 4
+    },
+    {
+      "fullname": "Nguyễn Tấn Dũng",
+      "username": "tandung",
+      "email": "tandung@gmail.com",
+      "phoneNumber": "0889161326",
+      "password": "123456789",
+      "confirm": "123456789",
+      "id": 5
     }
   ],
   "posts": [
