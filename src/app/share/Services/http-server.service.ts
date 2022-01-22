@@ -1,21 +1,28 @@
 import { any } from 'codelyzer/util/function';
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
-import {catchError} from 'rxjs/operators';
-import {Student} from '../model/Student';
-import {FormControl, FormGroup, FormGroupDirective, NgForm, ValidatorFn} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { Student } from '../model/Student';
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  ValidatorFn,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
 import { Manager } from '../model/manager';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-
 export class HttpServerService {
-  constructor(
-    private httpClient: HttpClient
-  ) { }
+  constructor(private httpClient: HttpClient) {}
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -23,19 +30,25 @@ export class HttpServerService {
   };
   private REST_API_SERVER = 'http://localhost:5000';
   // @ts-ignore
-  static childrenEqual: ValidatorFn = (formGroup: FormGroup) => {
-    const [firstControlName, ...otherControlNames] = Object.keys(formGroup.controls || {});
+  static childrenEqual: ValidatorFn = (formGroup: FormGroup | any) => {
+    const [firstControlName, ...otherControlNames] = Object.keys(
+      formGroup.controls || {}
+    );
     // @ts-ignore
-    const isValid = otherControlNames.every(controlName => formGroup.get(controlName).value === formGroup.get(firstControlName).value);
-    return isValid ? null : {childrenNotEqual: true};
-  }
-
+    const isValid = otherControlNames.every(
+      (controlName) =>
+        formGroup.get(controlName).value ===
+        formGroup.get(firstControlName).value
+    );
+    return isValid ? null : { childrenNotEqual: true };
+    // tslint:disable-next-line:semicolon
+  };
   // tslint:disable-next-line:typedef
   public searchStudent(textSearch: any): Observable<any> {
     const url = `${this.REST_API_SERVER}/students?q=${textSearch}`;
     return this.httpClient
-    .get<Student>(url, this.httpOptions)
-    .pipe(catchError(this.handleError));
+      .get<Student>(url, this.httpOptions)
+      .pipe(catchError(this.handleError));
   }
 
   // tslint:disable-next-line:typedef
@@ -61,8 +74,6 @@ export class HttpServerService {
       .pipe(catchError(this.handleError));
   }
 
-
-
   // tslint:disable-next-line:typedef
   public addStudent(data: Student) {
     const url = `${this.REST_API_SERVER}/students`;
@@ -79,15 +90,11 @@ export class HttpServerService {
       .pipe(catchError(this.handleError));
   }
 
-
-
   // tslint:disable-next-line:typedef
   public deleteStudent(studentId: number) {
     const url = `${this.REST_API_SERVER}/students/` + studentId;
     return this.httpClient.delete<any>(url).pipe(catchError(this.handleError));
   }
-
-
 
   // tslint:disable-next-line:typedef
   modifyStudent(studentId: number, data: Student) {
@@ -105,8 +112,6 @@ export class HttpServerService {
       .pipe(catchError(this.handleError));
   }
 
-
-
   // tslint:disable-next-line:typedef
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -122,10 +127,12 @@ export class HttpServerService {
     // return an observable with a user-facing error message
     return throwError('Something bad happened; please try again later.');
   }
-
 }
 export class ConfirmValidParentMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(
+    control: FormControl | null,
+    form: FormGroupDirective | NgForm | null
+  ): boolean {
     // @ts-ignore
     return control.parent.invalid && control.touched;
   }
@@ -136,6 +143,7 @@ export const errorMessages: { [key: string]: string } = {
   phone: 'Phone number must be 10 number',
   email: 'Email must be a valid email address (username@domain)',
   // confirmEmail: 'Email addresses must match',
-  password: 'Password must be between 7 and 15 characters, and contain at least one number and special character',
-  confirmPassword: 'Passwords must match'
+  password:
+    'Password must be between 7 and 15 characters, and contain at least one number and special character',
+  confirmPassword: 'Passwords must match',
 };

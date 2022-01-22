@@ -27,15 +27,17 @@ export class StudentComponent implements OnInit {
     private serverHttp: HttpServerService,
     private router: Router,
     private viewContainerRef: ViewContainerRef,
-    private modal: NzModalService,
+    private modal: NzModalService
   ) {}
 
   ngOnInit(): void {
     this.loadData();
     this.searchTerm$.pipe(debounceTime(1000)).subscribe((_) => {
-      this.serverHttp.searchStudent(this.textSearch).subscribe((students: any) => {
-        this.listOfData = students;
-      });
+      this.serverHttp
+        .searchStudent(this.textSearch)
+        .subscribe((students: any) => {
+          this.listOfData = students;
+        });
       console.log(this.searchTerm$);
     });
   }
@@ -89,16 +91,16 @@ export class StudentComponent implements OnInit {
   //   this.listOfData  = targetValue;
   // }
 
-
   createCustomButtonModal(): void {
     const modal: NzModalRef = this.modal.create({
       nzTitle: 'custom button demo',
-      nzContent: 'pass array of button config to nzFooter to create multiple buttons',
+      nzContent:
+        'pass array of button config to nzFooter to create multiple buttons',
       nzFooter: [
         {
           label: 'Close',
           shape: 'round',
-          onClick: () => modal.destroy()
+          onClick: () => modal.destroy(),
         },
         {
           label: 'Delete',
@@ -106,7 +108,7 @@ export class StudentComponent implements OnInit {
           shape: 'round',
           onClick: () => this.deleteStudent({}),
         },
-      ]
+      ],
     });
   }
 }

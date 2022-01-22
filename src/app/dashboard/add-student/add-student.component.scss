@@ -1,55 +1,55 @@
 .container {
-    max-width: 100%;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    padding-top: 70px;
+  max-width: 100%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 70px;
 }
 
 .card {
-    background-color: #fff;
+  background-color: #fff;
+  margin: auto;
+  width: 500px;
+  height: 825px;
+  .register-form {
     margin: auto;
-    width: 500px;
-    height: 825px;
-    .register-form {
-        margin: auto;
-        width: 100%;
-    }
+    width: 100%;
+  }
 }
 
 .register-form {
-    margin: 0 auto;
-    padding: 2em 4em;
-    .mat-form-field {
-        display: block;
-        width: 100%;
-    }
-    .row-actions {
-        display: flex;
-        place-content: flex-end;
-    }
-    .row-control {
-        margin-bottom: 15px;
-    }
-    .cancel {
-        background: #515151;
-        color: white;
-        margin-right: 10px;
-    }
+  margin: 0 auto;
+  padding: 2em 4em;
+  .mat-form-field {
+    display: block;
+    width: 100%;
+  }
+  .row-actions {
+    display: flex;
+    place-content: flex-end;
+  }
+  .row-control {
+    margin-bottom: 15px;
+  }
+  .cancel {
+    background: #515151;
+    color: white;
+    margin-right: 10px;
+  }
 }
 
 body {
-    background: url(../../assets/images/banner.jpg) no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 300;
-    max-width: 100%;
-    width: 100%;
-    // max-height: 500px;
-    height: 909px;
+  background: url(../../../assets/images/banner.jpg) no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  font-family: "Raleway", sans-serif;
+  font-weight: 300;
+  max-width: 100%;
+  width: 100%;
+  // max-height: 500px;
+  height: 909px;
 }
